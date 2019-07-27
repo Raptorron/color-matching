@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+*{
+  box-sizing: border-box;
+}
+body{
+  margin: 0 auto;
+  background-color: black;
+}
+#title{
+  text-align: center;
+  color: white;
+  font-style: oblique;
+}
+#color-list{
+  display: flex;
+  flex-wrap: wrap;
+  border: ridge 10px burlywood;
+}
+.colorPanel{
+  border: solid 3px white;
+  width: calc(100%/6);
+  height: 88px;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+nav{
+  border: solid 1px black;
+  width: 100%;
+  height: 88px;
+}
+
+.chosen:nth-child(1){background-color: red;}
+.chosen:nth-child(2){background-color: blue;}
+.chosen:nth-child(3){background-color: green;}
+.chosen:nth-child(4){background-color: aqua;}
+.chosen:nth-child(5){background-color: orange;}
+.chosen:nth-child(6){background-color: purple;}
+.chosen:nth-child(7){background-color: tan;}
+.chosen:nth-child(8){background-color: pink;}
+.chosen:nth-child(9){background-color: orange;}
+.chosen:nth-child(10){background-color: aqua;}
+.chosen:nth-child(11){background-color: yellow;}
+.chosen:nth-child(12){background-color: green;}
+.chosen:nth-child(13){background-color: purple;}
+.chosen:nth-child(14){background-color: red;}
+.chosen:nth-child(15){background-color: blue;}
+.chosen:nth-child(16){background-color: yellow;}
+.chosen:nth-child(17){background-color: tan;}
+.chosen:nth-child(18){background-color: purple;}
+.chosen:nth-child(19){background-color: pink;}
+.chosen:nth-child(20){background-color: tan;}
+.chosen:nth-child(21){background-color: orange;}
+.chosen:nth-child(22){background-color: red;}
+.chosen:nth-child(23){background-color: aqua;}
+.chosen:nth-child(24){background-color: blue;}
+.chosen:nth-child(25){background-color: tan;}
+.chosen:nth-child(26){background-color: green;}
+.chosen:nth-child(27){background-color: yellow;}
+.chosen:nth-child(28){background-color: red;}
+.chosen:nth-child(29){background-color: pink;}
+.chosen:nth-child(30){background-color: purple;}
+.chosen:nth-child(31){background-color: orange;}
+.chosen:nth-child(32){background-color: aqua;}
+.chosen:nth-child(33){background-color: pink;}
+.chosen:nth-child(34){background-color: yellow;}
+.chosen:nth-child(35){background-color: blue;}
+.chosen:nth-child(36){background-color: green;}
+#c{
+  color: red;
+}
+#o{
+  color: orange;
+}
+#l{
+  color:yellow;
+}
+#O{
+  color: green;
+}
+#r{
+  color:blue;
+}
+#s{
+  color: purple;
+}
+    </style>
+  </head>
+  <body>
+    <div id='container'>
+  <h1 id='title'>Find the matching <span id='c'>C</span><span id='o'>o</span><span id='l'>l</span><span id='O'>o</span><span id='r'>r</span><span id='s'>s</span></h1>
+  <div id='color-list'>
+  </div>
+   </div>
+  </body>
+  <script>
+    const colors = [
+      { color: 'red', tile: 1},
+      { color: 'blue', tile: 2},
+      { color: 'green', tile: 3},
+      { color: 'aqua', tile: 4},
+      { color: 'orange', tile: 5},
+      { color: 'purple', tile: 6},
+      { color: 'tan', tile: 7},
+      { color: 'pink', tile: 8},
+      { color: 'orange', tile: 9},
+      { color: 'aqua', tile: 10},
+      { color: 'yellow', tile: 11},
+      { color: 'green', tile: 12},
+      { color: 'purple', tile: 13},
+      { color: 'red', tile: 14},
+      { color: 'blue', tile: 15},
+      { color: 'yellow', tile: 16},
+      { color: 'tan', tile: 17},
+      { color: 'purple', tile: 18},
+      { color: 'pink', tile: 19},
+      { color: 'tan', tile: 20},
+      { color: 'orange', tile: 21},
+      { color: 'red', tile: 22},
+      { color: 'aqua', tile: 23},
+      { color: 'blue', tile: 24},
+      { color: 'tan', tile: 25},
+      { color: 'green', tile: 26},
+      { color: 'yellow', tile: 27},
+      { color: 'red', tile: 28},
+      { color: 'pink', tile: 29},
+      { color: 'purple', tile: 30},
+      { color: 'orange', tile: 31},
+      { color: 'aqua', tile: 32},
+      { color: 'pink', tile: 33},
+      { color: 'yellow', tile: 34},
+      { color: 'blue', tile: 35},
+      { color: 'green', tile: 36}
+    ];
+
+  const list = document.querySelector('#color-list');
+  const html = (colors) =>{
+    return colors.map(color =>`
+    <div class='colorPanel${color.isChosen ? ' chosen':''}'>
+    <nav></nav>
+    </div>`).join('');
+  };
+  const render = ()=> {
+    list.innerHTML = html(colors);
+  };
+  list.addEventListener('click', (el)=>{
+    if(el.target.tagName === 'NAV'){
+      const idx = [...el.target.parentNode.parentNode.children].indexOf(el.target.parentNode);
+      const color = colors[idx];
+      if(!color.isChosen && colors.filter(color=>color.isChosen).length === 4 ){
+        if(colors.filter(el => el.color.includes(el.color))){
+          alert('there are only four of the same color. :D')
+        } else{
+        alert('there is only four of the same color, keep trying');
+        }
+      } else {
+        color.isChosen = !color.isChosen;
+      }
+      render();
+    }
+  })
+  render();
+  </script>
+</html>
